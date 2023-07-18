@@ -1,4 +1,4 @@
-const sqlConnection = require("../../sqlite")
+const sqliteConnection = require("../../sqlite")
 const createUsers = require("./createUsers")
 
 async function migrationsRun() {
