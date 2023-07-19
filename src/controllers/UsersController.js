@@ -38,8 +38,7 @@ class UsersController {
     }
 
     const userWithUpdatedEmail = await database.get(
-      "SELECT * FROM users WHERE email = (?)",
-      [email]
+      "SELECT * FROM users WHERE email = (?)", [email]
     )
 
     if (userWithUpdatedEmail && userWithUpdatedEmail.id !== user.id) {
@@ -48,14 +47,11 @@ class UsersController {
     user.name = name
     user.email = email
 
-    await database.run(
-      `
-    UPDATE users SET
+    await database.run(`UPDATE users SET
     name = ?,
     email = ?,
-    updated_at = ?,
-    WHERE id = ?`,
-      [user.name, user.email, new Date(), id]
+    updated_at = ?
+    WHERE id = ?`, [user.name, user.email, new Date(), id]
     )
 
     return response.json()
